@@ -261,6 +261,18 @@ XForm.prototype = {
     },
 
     // DESCRIPTION
+    //      This method returns the state of a checkbox (checked of not).
+    // INPUT
+    //      - inName
+    //        Name of the form's checkbox.
+    // OUTPUT
+    //      The method returns the checkbox's state (true: checked, false: unchecked).
+
+    getState: function(inName) {
+        return this.getValue(inName);
+    },
+
+    // DESCRIPTION
     //      This method returns the jQuery element associated to a specified form's input.
     // INPUT
     //      - inName
@@ -328,6 +340,18 @@ XForm.prototype = {
         element = this.inputs[inName]['jquery'];
         return element.xInput("getDefault");
     },
+
+    // DESCRIPTION
+    //      This method returns the default state of a checkbox.
+    // INPUT
+    //      - inName
+    //        Name of the checkbox.
+    // OUTUT
+    //      The method returns the default state of the checkbox (true: checked, false: unchecked).
+
+    getDefaultState: function(inName) {
+        return this.getDefaultValue(inName);
+    },  
 
     // DESCRIPTION
     //      This method disables an input specified by its name.
