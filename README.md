@@ -65,8 +65,8 @@ Place the following HTML snipset within your HTML document:
 ```html
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/sprintf/dist/sprintf.min.js"></script>
-<script src="dist/xinput.js"></script>
-<script src="dist/xform.js"></script>
+<script src="bower_components/xform/dist/xinput.js"></script>
+<script src="bower_components/xform/dist/xform.js"></script>
 ```
 
 > Note: you may have to customise the paths to the JavaScript listed above. That is: you may have to change <code>"bower_components/jquery/dist/jquery.js"</code> by whatever path is relevant to your directory structure.
