@@ -1,0 +1,19 @@
+{
+  "name": "xform",
+  "description": "Easy form manipulation with jQuery.",
+  "authors": [
+	"Denis BEURIVE <denis.beurive@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "bower_components"
+  ],
+  "dependencies": {
+  	"jquery": ">=2.2.4",
+    "sprintf": ">=1.0.3"
+  },
+  "devDependencies": {
+	"bootstrap": "3.3.6"
+  }
+}

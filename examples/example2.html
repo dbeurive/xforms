@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Example 2</title>
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <script src="../bower_components/sprintf/dist/sprintf.min.js"></script>
+        <script src="../dist/xinput.js"></script>
+        <script src="../dist/xform.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+  
+
+        <script type="text/javascript">
+        $( document ).ready(function() {
+
+            var version = true;
+
+            var inputs = ['input_text', 'input_password', 'input_single_select', 'input_multi_select', 'input_checkbox', 'input_radio', 'input_color', 'input_date', 'input_email'];
+
+            var myForm = new XForm('myForm');
+            myForm.setInputs(inputs).disableInput("input_text");
+
+            var createValues = function() {
+
+                var randInteger = function(min, max) {
+                    return Math.round(Math.random() * (max - min) + min);
+                };
+
+                var randBoolean = function() {
+                    return Math.random() * 10 > 5;
+                };
+
+                var randArray = function(count, min, max) {
+                    var list = [];
+                    while (list.length < count) {
+                        var v = randInteger(min, max);
+                        if (list.indexOf(v) == -1) {
+                            list.push(v);
+                        }
+                    }
+                    return list;
+                };
+
+                var randColor = function() {
+                    var d = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+                    var color = "#";
+                    for (var i=0; i<6; i++) {
+                        color = color + d[randInteger(0, 15)];
+                    }
+                    return color;
+                };
+
+                var randDate = function() {
+                    var year  = "19" + randInteger(70, 99);
+                    var month = sprintf("%02d", randInteger(1, 12));
+                    var day   = sprintf("%02d", randInteger(1, 31));
+                    return year + '-' + month + '-' + day;
+                }
+
+                values = {
+                    input_text:             Math.random().toString(36).substring(7),
+                    input_password:         Math.random().toString(36).substring(7),
+                    input_single_select:    randInteger(1, 12),
+                    input_multi_select:     randArray(2, 1, 5),
+                    input_checkbox:         randBoolean(),
+                    input_radio:            randBoolean() ? 'no' : 'yes',
+                    input_color:            randColor(),
+                    input_date:             randDate(),
+                    input_email:            Math.random().toString(36).substring(7) + '@email.com'
+                };
+
+                return values;
+            }
+
+            // ------------------------------------------------------------------------------------
+            // Set the handler that extracts the form's values.
+            // ------------------------------------------------------------------------------------
+
+            $('#id_get_form_values').on('click', function() {
+                console.log(myForm.getValues());
+            });
+
+            // ------------------------------------------------------------------------------------
+            // Set the handler that changes the form's values.
+            // ------------------------------------------------------------------------------------
+
+            $('#id_set_form_values').on('click', function() {
+                myForm.setValues(createValues());
+            });
+
+            // ------------------------------------------------------------------------------------
+            // Reset the form's input.
+            // ------------------------------------------------------------------------------------
+
+            $('#id_reset').on('click', function() {
+                var status = myForm.reset();
+                console.log(status);
+            });
+
+            // ------------------------------------------------------------------------------------
+            // Set default values.
+            // ------------------------------------------------------------------------------------
+
+            $('#id_set_form_default_values').on('click', function() {
+                myForm.setValues(createValues(), 'default');
+            });
+
+            // ------------------------------------------------------------------------------------
+            // Set up "reset" buttons
+            // ------------------------------------------------------------------------------------
+
+            var inputs = myForm.getInputs('string');
+            for (var i=0; i<inputs.length; i++) {
+                var name   = inputs[i];
+                var button = $('#' + name + '_reset');
+
+                var setHandler = function(name, button) {
+                    button.on('click', function() {
+                        myForm.resetInput(name);
+                    });
+                };  
+                
+                setHandler(name, button); // Capture the value of the variable "name"...
+            }
+
+            // ------------------------------------------------------------------------------------
+            // Set up "disable/enable" buttons
+            // ------------------------------------------------------------------------------------
+
+            for (var i=0; i<inputs.length; i++) {
+                var name   = inputs[i];
+                var button = $('#' + name + '_state');
+                
+                var setHandler = function(name, button) {
+                    button.on('click', function() {
+                        if (button.html() == 'Disable') {
+                            myForm.disableInput(name);
+                            button.html("Enable");
+                        } else {
+                            myForm.enableInput(name);
+                            button.html("Disable");
+                        }
+                    });
+                };  
+                
+                setHandler(name, button); // Capture the value of the variables "name" and "button"...
+            }
+
+
+
+        });
+        </script>
+
+    </head>
+    <body>
+
+        <div class="container">
+
+            <h1>Introduction</h1>
+
+            <p>This example demonstrates the use of the high level API.</p>
+
+            <p>Please, make sure to open your browser's console.</p>
+
+            <H1>Form</H1>
+
+        <!-- ------------------------------------------------------------------------------------------------ -->
+        <!-- The formular                                                                                     -->
+        <!-- ------------------------------------------------------------------------------------------------ -->
+
+            <form id="myForm" class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="id_name" class="col-sm-2 control-label">Text:</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="input_text" id="id_name"/>
+                    </div>
+                    <button type="button" id="input_text_state">Disable</button>
+                    <button type="button" id="input_text_reset">Reset</button>
+                    <button type="button" id="input_text_set">Set current</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password" class="col-sm-2 control-label">Password:</label>
+                    <div class="col-sm-4">
+                        <input type="password" name="input_password" id="id_password"/>
+                    </div>
+                    <button type="button" id="input_password_state">Disable</button>
+                    <button type="button" id="input_password_reset">Reset</button>
+                    <button type="button" id="input_password_set">Set current</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_single_select" class="col-sm-2 control-label">Single select:</label>
+                    <div class="col-sm-4">
+                        <select name="input_single_select" id="id_single_select">
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                        </select>
+                    </div>
+                    <button type="button" id="input_single_select_state">Disable</button>
+                    <button type="button" id="input_single_select_reset">Reset</button>
+                    <button type="button" id="input_single_select_set">Set current</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_multi_select" class="col-sm-2 control-label">Multi select:</label>
+                    <div class="col-sm-4">
+                        <select name="input_multi_select" id="id_multi_select" multiple>
+                                <option value="1">items 1</option>
+                                <option value="2">items 2</option>
+                                <option value="3">items 3</option>
+                                <option value="4">items 4</option>
+                                <option value="5">items 5</option>
+                        </select>
+                    </div>
+                    <button type="button" id="input_multi_select_state">Disable</button>
+                    <button type="button" id="input_multi_select_reset">Reset</button>
+                    <button type="button" id="input_multi_select_set">Set current</button>
+                </div>
+
+                <div class="form-group">   
+                    <label for="id_checkbox" class="col-sm-2 control-label">Checkbox:</label>
+                    <div class="col-sm-4">
+                        <input type="checkbox" name="input_checkbox" value="yes of course" checked="" id="id_checkbox"/>&nbsp;Yes of course
+                    </div>
+                    <button type="button" id="input_checkbox_state">Disable</button>
+                    <button type="button" id="input_checkbox_reset">Reset</button>
+                    <button type="button" id="input_checkbox_set">Set current</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_response" class="col-sm-2 control-label">Radio:</label>
+                    <div class="col-sm-4">
+                        <input type="radio" name="input_radio" value="yes" id="id_response">yes</input>
+                        <input type="radio" name="input_radio" value="no">no</input>
+                    </div>
+                    <button type="button" id="input_radio_state">Disable</button>
+                    <button type="button" id="input_radio_reset">Reset</button>
+                    <button type="button" id="input_radio_set">Set current</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_color" class="col-sm-2 control-label">Color:</label>
+                    <div class="col-sm-4">
+                        <input type="color" name="input_color" id="id_color"/>
+                    </div>
+                    <button type="button" id="input_color_state">Disable</button>
+                    <button type="button" id="input_color_reset">Reset</button>
+                    <button type="button" id="input_color_set">Set current</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_date" class="col-sm-2 control-label">Date:</label>
+                    <div class="col-sm-4">
+                        <input type="date" name="input_date" id="id_date"/>
+                    </div>
+                    <button type="button" id="input_date_state">Disable</button>
+                    <button type="button" id="input_date_reset">Reset</button>
+                    <button type="button" id="input_date_set">Set current</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_email" class="col-sm-2 control-label">Email:</label>
+                    <div class="col-sm-4">
+                        <input type="email" name="input_email" id="id_email"/>
+                    </div>
+                    <button type="button" id="input_email_state">Disable</button>
+                    <button type="button" id="input_email_reset">Reset</button>
+                    <button type="button" id="input_email_set">Set current</button>
+                </div>
+
+            </form>
+
+        <!-- ------------------------------------------------------------------------------------------------ -->
+        <!-- The controls                                                                                     -->
+        <!-- ------------------------------------------------------------------------------------------------ -->
+
+            <br/><br/>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <button type="button" id="id_get_form_values" style="display:inline-block; width:100%;">
+                    Get Values (to browser's console)
+                    </button>
+                </div>
+
+                <div class="col-md-6">
+                    <button type="button" id="id_set_form_values" style="display:inline-block; width:100%;">
+                    Set current Values
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <button type="button" id="id_set_form_default_values" style="display:inline-block; width:100%;">
+                    Set default values
+                    </button>
+                </div>
+            
+                <div class="col-md-6">
+                    <button type="button" id="id_reset" style="display:inline-block; width:100%;">
+                    Reset (to default values)
+                    </button>
+                </div>
+
+            </div>
+
+
+    </body>
+</html>

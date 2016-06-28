@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Example 1</title>
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <script src="../bower_components/sprintf/dist/sprintf.min.js"></script>
+        <script src="../dist/xinput.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+  
+        <script type="text/javascript">
+        $( document ).ready(function() {
+
+            var updateBoard = function() {
+                var line = 2; // Skip the first line of the table (the headers).
+                $('#myForm').find('[name]').each(function(inIndex) {
+                    var value = $(this).xInput("getValue");
+                    if (typeof value === 'undefined') { value = "<i>No value specified</i>"; }
+                    if (value instanceof Array) { value = value.join(', '); }
+                    $('#id_board tr:nth-child(' + line + ')').find('td:nth-child(3)').html(value);
+                    line++;
+                });
+            };
+
+            var setValues1 = function() {
+                $("#myForm").find("[name='input_text']").xInput('setValue', 'The name', 'current');
+                $("#myForm").find("[name='input_password']").xInput('setValue', 'The password', 'current');
+                $("#myForm").find("[name='input_single_select']").xInput('setValue', '3', 'current');
+                $("#myForm").find("[name='input_multi_select']").xInput('setValue', 4, 'current');
+                $("#myForm").find("[name='input_checkbox']").xInput('setState', false, 'current');
+                $("#myForm").find("[name='input_radio']").xInput('setValue', 'yes', 'current');
+                $("#myForm").find("[name='input_color']").xInput('setValue', '#FFFFFF', 'current');                
+                $("#myForm").find("[name='input_date']").xInput('setValue', '2016-01-01', 'current');
+                $("#myForm").find("[name='input_email']").xInput('setValue', 'email@email.org', 'current');
+            };
+
+            var setValues2 = function() {
+                $("#myForm").find("[name='input_text']").xInput('setValue', 'The other name', 'current');
+                $("#myForm").find("[name='input_password']").xInput('setValue', 'The other password', 'current');
+                $("#myForm").find("[name='input_single_select']").xInput('setValue', '5', 'current');
+                $("#myForm").find("[name='input_multi_select']").xInput('setValue', [1, 3], 'current');
+                $("#myForm").find("[name='input_checkbox']").xInput('setState', true, 'current');
+                $("#myForm").find("[name='input_radio']").xInput('setValue', 'no', 'current');
+                $("#myForm").find("[name='input_color']").xInput('setValue', '#000000', 'current');                
+                $("#myForm").find("[name='input_date']").xInput('setValue', '2016-12-31', 'current');
+                $("#myForm").find("[name='input_email']").xInput('setValue', 'other_email@email.org', 'current');
+            };
+
+            var setDefaults = function() {
+                $("#myForm").find("[name='input_text']").xInput('setDefaultValue', 'The default name', 'default');
+                $("#myForm").find("[name='input_password']").xInput('setDefaultValue', 'The default password', 'default');
+                $("#myForm").find("[name='input_single_select']").xInput('setDefaultValue', '1', 'default');
+                $("#myForm").find("[name='input_multi_select']").xInput('setDefaultValue', [2, 4], 'default');
+                $("#myForm").find("[name='input_checkbox']").xInput('setDefaultState', true, 'default');
+                $("#myForm").find("[name='input_radio']").xInput('setDefaultValue', 'yes', 'default');
+                $("#myForm").find("[name='input_color']").xInput('setDefaultValue', '#FF0000', 'default');                
+                $("#myForm").find("[name='input_date']").xInput('setDefaultValue', '2010-06-015', 'default');
+                $("#myForm").find("[name='input_email']").xInput('setDefaultValue', 'default_email@email.org', 'default');
+            };
+           
+            // Inject data into the table below the form.
+            // Set up the reset button for each entry.
+            $('#myForm').find('[name]').each(function(inIndex) {
+                var e        = $(this);
+                var name     = $(this).attr("name");
+                var type     = $(this).xInput("getType");
+                var value    = $(this).xInput("getValue");
+                var id_reset = name + '_reset';
+
+                if (typeof value === 'undefined') { value = "<i>No value specified</i>"; }
+                $('#id_board').append('<tr><td>' + name + '</td><td>' + type + '</td><td>' + value + '</td></tr>');
+
+                $('#' + id_reset).on('click', function() {
+                    var status = e.xInput('reset');
+                });
+            });
+
+            // Set disable handler for all standard entries.
+            $('#myForm').find('[name]').each(function(inIndex) {
+                var e        = $(this);
+                var name     = $(this).attr("name");
+                var id_state = name + '_state';
+
+                // Skip the radio boxes
+                if (name == 'input_radio') { return true; }
+
+                $('#' + id_state).on('click', function() {
+                    if ($(this).html() == 'Disable') {
+                        e.xInput('disable');
+                        $(this).html("Enable");
+                    } else {
+                        e.xInput('enable');
+                        $(this).html("Disable");
+                    }
+                });
+            });
+
+            // Set disable handler for radio entries.
+            $('#input_radio_state').on('click', function() {
+
+                var action = null;
+                if ($(this).html() == 'Disable') {
+                    $(this).html("Enable");
+                    action = 'disable';
+                } else {
+                    $(this).html("Disable");
+                    action = 'enable';
+                }
+
+                $('#myForm').find("[name='input_radio']").each(function(inIndex) {
+                    $(this).xInput(action);
+                });
+            });
+            
+            setDefaults();
+            $('#id_board_update').on('click', updateBoard);
+            $('#id_board_set1').on('click', setValues1);
+            $('#id_board_set2').on('click', setValues2);
+
+        });
+        </script>
+
+    </head>
+    <body>
+
+        <div class="container">
+
+            <h1>Introduction</h1>
+
+            <p>This example demonstrates the use of the low level API.</p>
+
+            <H1>Form</H1>
+
+        <!-- ------------------------------------------------------------------------------------------------ -->
+        <!-- The formular                                                                                     -->
+        <!-- ------------------------------------------------------------------------------------------------ -->
+
+            <form id="myForm" class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="id_name" class="col-sm-2 control-label">Text:</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="input_text" id="id_name"/>
+                    </div>
+                    <button type="button" id="input_text_state">Disable</button>
+                    <button type="button" id="input_text_reset">Reset</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password" class="col-sm-2 control-label">Password:</label>
+                    <div class="col-sm-4">
+                        <input type="password" name="input_password" id="id_password"/>
+                    </div>
+                    <button type="button" id="input_password_state">Disable</button>
+                    <button type="button" id="input_password_reset">Reset</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_single_select" class="col-sm-2 control-label">Single select:</label>
+                    <div class="col-sm-4">
+                        <select name="input_single_select" id="id_single_select">
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                        </select>
+                    </div>
+                    <button type="button" id="input_single_select_state">Disable</button>
+                    <button type="button" id="input_single_select_reset">Reset</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_multi_select" class="col-sm-2 control-label">Multi select:</label>
+                    <div class="col-sm-4">
+                        <select name="input_multi_select" id="id_multi_select" multiple>
+                                <option value="1">items 1</option>
+                                <option value="2">items 2</option>
+                                <option value="3">items 3</option>
+                                <option value="4">items 4</option>
+                                <option value="5">items 5</option>
+                        </select>
+                    </div>
+                    <button type="button" id="input_multi_select_state">Disable</button>
+                    <button type="button" id="input_multi_select_reset">Reset</button>
+                </div>
+
+                <div class="form-group">   
+                    <label for="id_checkbox" class="col-sm-2 control-label">Checkbox:</label>
+                    <div class="col-sm-4">
+                        <input type="checkbox" name="input_checkbox" value="yes" checked="" id="id_checkbox"/>
+                    </div>
+                    <button type="button" id="input_checkbox_state">Disable</button>
+                    <button type="button" id="input_checkbox_reset">Reset</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_response" class="col-sm-2 control-label">Radio:</label>
+                    <div class="col-sm-4">
+                        <input type="radio" name="input_radio" value="yes" id="id_response">yes</input>
+                        <input type="radio" name="input_radio" value="no">no</input>
+                    </div>
+                    <button type="button" id="input_radio_state">Disable</button>
+                    <button type="button" id="input_radio_reset">Reset</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_color" class="col-sm-2 control-label">Color:</label>
+                    <div class="col-sm-4">
+                        <input type="color" name="input_color" id="id_color"/>
+                    </div>
+                    <button type="button" id="input_color_state">Disable</button>
+                    <button type="button" id="input_color_reset">Reset</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_date" class="col-sm-2 control-label">Date:</label>
+                    <div class="col-sm-4">
+                        <input type="date" name="input_date" id="id_date"/>
+                    </div>
+                    <button type="button" id="input_date_state">Disable</button>
+                    <button type="button" id="input_date_reset">Reset</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_email" class="col-sm-2 control-label">Email:</label>
+                    <div class="col-sm-4">
+                        <input type="email" name="input_email" id="id_email"/>
+                    </div>
+                    <button type="button" id="input_email_state">Disable</button>
+                    <button type="button" id="input_email_reset">Reset</button>
+                </div>
+
+            </form>
+
+        <!-- ------------------------------------------------------------------------------------------------ -->
+        <!-- Types                                                                                            -->
+        <!-- ------------------------------------------------------------------------------------------------ -->
+
+            <br/>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="id_board_update">Update the table</button>
+                    <button id="id_board_set1">Set default values</button>
+                    <button id="id_board_set2">Set other default values</button>
+                    <br/><br/>
+                    <table class="table" id="id_board">
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Value</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+    </body>
+</html>
