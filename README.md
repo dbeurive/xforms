@@ -22,13 +22,13 @@ If you only want to use the library, then the easiest way to install it is throu
 
 ## Installation for developers
 
-If you want to get the examples, then you should get a copy of the GIT repository.
+If you want to get the examples, then you should get a copy of the GIT repository:
 
-Download the ZIP file: https://github.com/dbeurive/xforms/archive/master.zip
-
-Or clone the repository:
-
-	git@github.com:dbeurive/xforms.git
+> Download the ZIP file: [https://github.com/dbeurive/xforms/archive/master.zip](https://github.com/dbeurive/xforms/archive/master.zip)
+>
+> Or clone the repository:
+>
+>	<code>git clone git@github.com:dbeurive/xforms.git</code>
 
 Then you must install the dependencies:
 
