@@ -70,7 +70,7 @@ Place the following HTML snipset within your HTML document:
 <script src="bower_components/xform/dist/xform.js"></script>
 ```
 
-> Note: you may have to customise the paths to the JavaScript listed above. That is: you may have to change <code>"bower_components/jquery/dist/jquery.js"</code> by whatever path is relevant to your directory structure.
+> Note: you may have to customise the paths to the JavaScript files listed above. That is: for example, you may have to change <code>"bower_components/jquery/dist/jquery.js"</code> by whatever path is relevant to your directory structure.
 
 ## Overview
 
@@ -83,10 +83,12 @@ Place the following HTML snipset within your HTML document:
 | reset            | Reset the values of all the form's inputs (assuming that you set default values)                     | 
 | setValue         | Set a value for a single input (this method works for all types of inputs, including checkboxes)     |
 | getValue         | Get the value of a single input (this method works for all types of inputs, including checkboxes)    |
-| setState         | Set the state (checked or not) of a checkbox.                                                        | 
+| setState         | Set the state (checked or not) of a checkbox.                                                        |
+| getState         | Get the state (checked or not) of a checkbox.                                                        |
 | setDefaultValue  | Set a default value for an input (this method works for all types of inputs, including checkboxes)   |
 | getDefaultValue  | Get the default value of an input (this method works for all types of inputs, including checkboxes)  |
 | setDefaultState  | Set the default state for a checkbox.                                                                |
+| getDefaultState  | Get the default state for a checkbox.                                                                |
 | disableInput     | Disable an input.                                                                                    |
 | enableInput      | Enable an input.                                                                                     |
 | resetInput       | Reset the value of an input to its default value, if set (this method works for all types of inputs) |
