@@ -32,8 +32,9 @@ Or clone the repository:
 
 Then you must install the dependencies:
 
-	bower install xform
+	bower install
 
+This command will install the dependencies listed into the file [<code>bower.json</code>](https://github.com/dbeurive/xforms/blob/master/bower.json).
 
 
 
