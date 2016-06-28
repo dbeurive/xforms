@@ -24,6 +24,12 @@ If you only want to use the library, then the easiest way to install it is throu
 
 If you want to get the examples, then you should get a copy of the GIT repository.
 
+Download the ZIP file: https://github.com/dbeurive/xforms/archive/master.zip
+
+Or clone the repository:
+
+	git@github.com:dbeurive/xforms.git
+
 Then you must install the dependencies:
 
 	bower install xform
@@ -33,7 +39,37 @@ Then you must install the dependencies:
 
 
 
+# Complete examples
+
+You can find an example here: https://github.com/dbeurive/xforms/blob/master/examples/example2.html
+
+> Note : please note that the example is not installed if you follow the installation procedure that uses Bower.
+> If you want to get the example, you should follow the procedure described in the section "Installation for developers".
+
+
+
+
+
+
+
 # API
+
+## Requirements
+
+The requirements are listed into the file [<code>bower.json</code>](https://github.com/dbeurive/xforms/blob/master/bower.json).
+
+## Initialisation
+
+Place the following HTML snipset within your HTML document:
+
+```html
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/sprintf/dist/sprintf.min.js"></script>
+<script src="dist/xinput.js"></script>
+<script src="dist/xform.js"></script>
+```
+
+> Note: you may have to customise the paths to the JavaScript listed above. That is: you may have to change <code>"bower_components/jquery/dist/jquery.js"</code> by whatever path is relevant to your directory structure.
 
 ## setInputs(inArrayInputsNames)
 

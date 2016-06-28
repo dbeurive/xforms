@@ -7,7 +7,8 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "bower_components"
+    "bower_components",
+    "examples"
   ],
   "dependencies": {
   	"jquery": ">=2.2.4",
