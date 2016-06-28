@@ -14,7 +14,11 @@ This library extends jQuery’s API’s in two ways :
 
 # Installation
 
-## Installation for end user
+## Requirements
+
+The requirements are listed into the file [<code>bower.json</code>](https://github.com/dbeurive/xforms/blob/master/bower.json).
+
+## Installation for end users
 
 If you only want to use the library, then the easiest way to install it is through Bower:
 
@@ -55,10 +59,6 @@ You can find an example here: https://github.com/dbeurive/xforms/blob/master/exa
 
 # API
 
-## Requirements
-
-The requirements are listed into the file [<code>bower.json</code>](https://github.com/dbeurive/xforms/blob/master/bower.json).
-
 ## Initialisation
 
 Place the following HTML snipset within your HTML document:
@@ -71,6 +71,28 @@ Place the following HTML snipset within your HTML document:
 ```
 
 > Note: you may have to customise the paths to the JavaScript listed above. That is: you may have to change <code>"bower_components/jquery/dist/jquery.js"</code> by whatever path is relevant to your directory structure.
+
+## Overview
+
+| Method           | Overview
+|------------------|------------------------------------------------------------------------------------------------------|
+| setInputs        | Specify the names of the form's inputs.                                                              |
+| getInputs        | Get the forms' inputs.                                                                               |
+| setValues        | Set values for the form's inputs. This method sets _current_ or _default_ values.                    |
+| getValues        | Get values from all the form's inputs.                                                               |
+| reset            | Reset the values of all the form's inputs (assuming that you set default values)                     | 
+| setValue         | Set a value for a single input (this method works for all types of inputs, including checkboxes)     |
+| getValue         | Get the value of a single input (this method works for all types of inputs, including checkboxes)    |
+| setState         | Set the state (checked or not) of a checkbox.                                                        | 
+| setDefaultValue  | Set a default value for an input (this method works for all types of inputs, including checkboxes)   |
+| getDefaultValue  | Get the default value of an input (this method works for all types of inputs, including checkboxes)  |
+| setDefaultState  | Set the default state for a checkbox.                                                                |
+| disableInput     | Disable an input.                                                                                    |
+| enableInput      | Enable an input.                                                                                     |
+| resetInput       | Reset the value of an input to its default value, if set (this method works for all types of inputs) |
+| getElement       | Get the jQuery element associated to an input.                                                       |
+
+Forms' inputs are identified by their _names_ (that is, the value of the attribute "name").
 
 ## setInputs(inArrayInputsNames)
 
