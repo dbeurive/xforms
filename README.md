@@ -98,23 +98,23 @@ Forms' inputs are identified by their _names_ (that is, the value of the attribu
 
 ## Detailed API
 
-* [https://github.com/dbeurive/xforms/blob/master/doc/setInputs.md](setInputs(inArrayInputsNames))
-* [https://github.com/dbeurive/xforms/blob/master/doc/getInputs.md](getInputs(inOptType))
-* [https://github.com/dbeurive/xforms/blob/master/doc/setValues.md](setValues())
-* [https://github.com/dbeurive/xforms/blob/master/doc/getValues.md](getValues())
-* [https://github.com/dbeurive/xforms/blob/master/doc/reset.md](reset)
-* [https://github.com/dbeurive/xforms/blob/master/doc/setValue.md](setValue(inName, inValue))
-* [https://github.com/dbeurive/xforms/blob/master/doc/getValue.md](getValue(inName))
-* [https://github.com/dbeurive/xforms/blob/master/doc/setState.md](setState(inName, inState))
-* [https://github.com/dbeurive/xforms/blob/master/doc/getState.md](getState(inName))
-* [https://github.com/dbeurive/xforms/blob/master/doc/setDefaultValue.md](setDefaultValue(inName, inValue))
-* [https://github.com/dbeurive/xforms/blob/master/doc/getDefaultValue.md](getDefaultValue(inName))
-* [https://github.com/dbeurive/xforms/blob/master/doc/setDefaultState.md](setDefaultState(inName, inState))
-* [https://github.com/dbeurive/xforms/blob/master/doc/setDefaultState.md](setDefaultState(inName, inState))
-* [https://github.com/dbeurive/xforms/blob/master/doc/disableInput.md](disableInput(inName))
-* [https://github.com/dbeurive/xforms/blob/master/doc/enableInput.md](enableInput(inName))
-* [https://github.com/dbeurive/xforms/blob/master/doc/resetInput.md](resetInput(inName))
-* [https://github.com/dbeurive/xforms/blob/master/doc/getElement.md](getElement(inName))
+* (https://github.com/dbeurive/xforms/blob/master/doc/setInputs.md)[setInputs(inArrayInputsNames)]
+* (https://github.com/dbeurive/xforms/blob/master/doc/getInputs.md)[getInputs(inOptType)]
+* (https://github.com/dbeurive/xforms/blob/master/doc/setValues.md)[setValues()]
+* (https://github.com/dbeurive/xforms/blob/master/doc/getValues.md)[getValues()]
+* (https://github.com/dbeurive/xforms/blob/master/doc/reset.md)[reset()]
+* (https://github.com/dbeurive/xforms/blob/master/doc/setValue.md)[setValue(inName, inValue)]
+* (https://github.com/dbeurive/xforms/blob/master/doc/getValue.md)[getValue(inName)]
+* (https://github.com/dbeurive/xforms/blob/master/doc/setState.md)[setState(inName, inState)]
+* (https://github.com/dbeurive/xforms/blob/master/doc/getState.md)[getState(inName)]
+* (https://github.com/dbeurive/xforms/blob/master/doc/setDefaultValue.md)[setDefaultValue(inName, inValue)]
+* (https://github.com/dbeurive/xforms/blob/master/doc/getDefaultValue.md)[getDefaultValue(inName)]
+* (https://github.com/dbeurive/xforms/blob/master/doc/setDefaultState.md)[setDefaultState(inName, inState)]
+* (https://github.com/dbeurive/xforms/blob/master/doc/getDefaultState.md)[getDefaultState(inName, inState)]
+* (https://github.com/dbeurive/xforms/blob/master/doc/disableInput.md)[disableInput(inName)]
+* (https://github.com/dbeurive/xforms/blob/master/doc/enableInput.md)[enableInput(inName)]
+* (https://github.com/dbeurive/xforms/blob/master/doc/resetInput.md)[resetInput(inName)]
+* (https://github.com/dbeurive/xforms/blob/master/doc/getElement.md)[getElement(inName)]
 
 
 
