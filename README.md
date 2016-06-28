@@ -102,7 +102,7 @@ Forms' inputs are identified by their _names_ (that is, the value of the attribu
 * (https://github.com/dbeurive/xforms/blob/master/doc/getInputs.md)[getInputs(inOptType)]
 * (https://github.com/dbeurive/xforms/blob/master/doc/setValues.md)[setValues()]
 * (https://github.com/dbeurive/xforms/blob/master/doc/getValues.md)[getValues()]
-* (https://github.com/dbeurive/xforms/blob/master/doc/reset.md)[reset()]
+* (https://github.com/dbeurive/xforms/blob/master/doc/reset.md)[reset]
 * (https://github.com/dbeurive/xforms/blob/master/doc/setValue.md)[setValue(inName, inValue)]
 * (https://github.com/dbeurive/xforms/blob/master/doc/getValue.md)[getValue(inName)]
 * (https://github.com/dbeurive/xforms/blob/master/doc/setState.md)[setState(inName, inState)]
